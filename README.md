@@ -4,8 +4,6 @@ A more secure, dedicated, Chrome-based captive portal browser that automatically
 
 `captive-browser` detects the DHCP DNS server and runs a SOCKS5 proxy that resolves hostnames through it. Then it starts a Chrome instance in Incognito mode with a separate data directory and waits for it to exit.
 
-[Read more on my blog.](https://blog.filippo.io/captive-browser)
-
 ## Installation
 
 You'll need Chrome and Go 1.9 or newer.
@@ -33,7 +31,6 @@ cp $(go env GOPATH)/src/github.com/FiloSottile/captive-browser/captive-browser-u
 ### Arch / systemd-networkd
 
 ```
-go get -u github.com/FiloSottile/captive-browser/cmd/systemd-networkd-dns
 cp $(go env GOPATH)/src/github.com/FiloSottile/captive-browser/captive-browser-arch-chrome.toml ~/.config/captive-browser.toml
 ```
 

@@ -1,0 +1,15 @@
+# IDE configuration
+/.idea/
+.history
+.vscode/
+.devcontainer/
+
+# Binary releases
+/dist/
+/captive-portal
+
+# Used for temporary files such as coverage files.
+/.tmp/
+
+# Other files
+/snap.login

@@ -1,0 +1,40 @@
+name: Test, build and coverage
+on:
+  push:
+    branches:
+      - 'main'
+      - '*.x'
+    paths-ignore:
+      - 'docs/**'
+      - '*.md'
+  pull_request:
+    paths-ignore:
+      - 'docs/**'
+      - '*.md'
+
+env:
+    # run coverage only with the latest Go version
+    LATEST_GO_VERSION: '1.24'
+
+jobs:
+  test-matrix:
+    strategy:
+      matrix:
+        go-version: ['1.24']
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: ${{ matrix.go-version }}      
+      - name: Build binary
+        run: make build
+      - name: Run tests
+        run: make test
+      - name: Send code coverage
+        if: success() && matrix.go == env.LATEST_GO_VERSION && matrix.os == 'ubuntu-latest'
+        uses: codecov/codecov-action@v5
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        

@@ -1,7 +1,14 @@
+# This VERSION could be set calling `make VERSION=0.2.0`
+VERSION ?= $(shell git describe --tags --always --dirty)
+LDFLAGS=-ldflags "-X main.Version=$(VERSION)"
+
+TEST_VERSION="0.0.0-test.preview"
+TEST_LDFLAGS=-ldflags "-X main.Version=$(TEST_VERSION)"
+
 # go source files, ignore vendor directory
 PKGS = $(shell go list ./... | grep -v /vendor)
-SRC := main.go
-BINARY := captive-portal
+SRC := .
+BINARY := captive-browser
 
 # Temporary files to be used, you can changed it calling `make TMP_DIR=/tmp`
 TMP_DIR ?= .tmp
@@ -27,7 +34,7 @@ endif
 test: ## Run all the tests
 	@echo "--> Running tests..."
 	@mkdir -p $(dir $(COVERAGE_FILE))
-	@go test -covermode=atomic -coverprofile=$(COVERAGE_FILE) -race -failfast -timeout=30s $(PKGS)
+	@go test -covermode=atomic -coverprofile=$(COVERAGE_FILE) -race -failfast -timeout=30s ${TEST_LDFLAGS} $(PKGS)
 
 .PHONY: cover
 cover: test ## Run all the tests and opens the coverage report
@@ -42,7 +49,7 @@ endif
 
 build: ## Build the app
 	@echo "--> Building binary artifact ($(BINARY) $(VERSION))..."
-	@go build -o $(BINARY) $(SRC)
+	@go build ${LDFLAGS} -o $(BINARY) $(SRC)
 
 .PHONY: clean
 clean: ## Clean all built artifacts
@@ -64,6 +71,10 @@ lint: $(GOLANGCI) ## Run linter
 
 .PHONY: ci
 ci: lint test cover build ## Run all the tests and code checks
+
+.PHONY: version
+version: ## Show current version
+	@echo "$(VERSION)"
 
 .PHONY: help
 help: ## Show this help

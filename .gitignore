@@ -6,7 +6,7 @@
 
 # Binary releases
 /dist/
-/captive-portal
+/captive-browser
 
 # Used for temporary files such as coverage files.
 /.tmp/

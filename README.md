@@ -35,7 +35,7 @@ Replace `<OS>` and `<ARCH>` with your operating system and architecture.
 ### macOS
 
 ```
-cp config/captive-browser-mac.toml ~/.config/captive-browser.toml
+cp config_examples/captive-browser-mac.toml ~/.config/captive-browser.toml
 ```
 
 To disable the insecure system captive browser [see here](https://github.com/drduh/macOS-Security-and-Privacy-Guide#captive-portal). If that doesn't work, disable SIP (remember to re-enable it), and rename `/System/Library/CoreServices/Captive Network Assistant.app`.
@@ -44,19 +44,19 @@ To disable the insecure system captive browser [see here](https://github.com/drd
 #### Linux with NetworkManager (Ubuntu)
 
 ```
-cp config/captive-browser-linux-networkmanager.toml ~/.config/captive-browser.toml
+cp config_examples/captive-browser-linux-networkmanager.toml ~/.config/captive-browser.toml
 ```
 
 #### Linux with systemd-networkd
 
 ```
-cp config/captive-browser-linux-systemd-networkd.toml ~/.config/captive-browser.toml
+cp config_examples/captive-browser-linux-systemd-networkd.toml ~/.config/captive-browser.toml
 ```
 
 #### Linux with dhcpcd
 
 ```
-cp config/captive-browser-linux-dhcpd.toml ~/.config/captive-browser.toml
+cp config_examples/captive-browser-linux-dhcpd.toml ~/.config/captive-browser.toml
 ```
 
 ## Usage

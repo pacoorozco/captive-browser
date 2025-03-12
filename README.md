@@ -8,44 +8,57 @@ This is a fork from [captive-browser](https://github.com/FiloSottile/captive-bro
 
 ## Installation
 
-You'll need Chrome and Go 1.20 or newer.
+1. **Download the tar file**:
+   Go to the [GitHub releases page](https://github.com/pacoorozco/captive-browser/releases) and download the appropriate `tar.gz` file for your operating system and architecture.
 
-```
-go get -u github.com/pacoorozco/captive-browser
-```
+2. **Decompress the tar file**:
+   Use the following command to decompress the tar file:
+   ```sh
+   tar -xzf captive-browser_<OS>_<ARCH>.tar.gz
+   ```
 
-You have to install a config file in `$XDG_CONFIG_HOME/captive-browser.toml` (if set) or `~/.config/captive-browser.toml`. You can probably use one of the stock ones below. You might have to modify the network interface.
+3. **Move the binary to a directory in your PATH**:
+   ```sh
+   sudo mv captive-browser /usr/local/bin/
+   ```
+
+4. **Copy the configuration file**:
+   You have to install a config file in `$XDG_CONFIG_HOME/captive-browser.toml` (if set) or `~/.config/captive-browser.toml`. You can probably use one of the stock config file from the `config_examples` folder and copy it to your configuration directory:
+   ```sh
+   cp config_examples/captive-browser-linux-networkmanager.toml ~/.config/captive-browser.toml
+   ```
+
+   You can also amend the config to use Chromium instead of Chrome (see `browser` variable).
+
+Replace `<OS>` and `<ARCH>` with your operating system and architecture.
 
 ### macOS
 
 ```
-cp config/captive-browser-mac-chrome.toml ~/.config/captive-browser.toml
+cp config/captive-browser-mac.toml ~/.config/captive-browser.toml
 ```
 
 To disable the insecure system captive browser [see here](https://github.com/drduh/macOS-Security-and-Privacy-Guide#captive-portal). If that doesn't work, disable SIP (remember to re-enable it), and rename `/System/Library/CoreServices/Captive Network Assistant.app`.
 
-### Ubuntu
+### Linux
+#### Linux with NetworkManager (Ubuntu)
 
 ```
-cp config/captive-browser-ubuntu-chrome.toml ~/.config/captive-browser.toml
+cp config/captive-browser-linux-networkmanager.toml ~/.config/captive-browser.toml
 ```
 
-### Arch / systemd-networkd
+#### Linux with systemd-networkd
 
 ```
-cp config/captive-browser-arch-chrome.toml ~/.config/captive-browser.toml
+cp config/captive-browser-linux-systemd-networkd.toml ~/.config/captive-browser.toml
 ```
 
-### Arch / dhcpcd
+#### Linux with dhcpcd
 
 ```
-cp config/captive-browser-dhcpcd-chromium.toml ~/.config/captive-browser.toml
+cp config/captive-browser-linux-dhcpd.toml ~/.config/captive-browser.toml
 ```
 
 ## Usage
 
 Simply run `captive-browser`, log into the captive portal, and then *quit* (⌘Q / Ctrl-Q) the Chrome instance.
-
-If the binary is not found, try `$(go env GOPATH)/bin/captive-browser`.
-
-To configure the browser, open a non-Incognito window (⌘N / Ctrl-N).

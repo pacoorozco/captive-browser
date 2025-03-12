@@ -25,7 +25,7 @@ archives:
       {{- else }}{{ .Arch }}{{ end }}
       {{- if .Arm }}v{{ .Arm }}{{ end }}
     files:
-      - config/*
+      - config_examples/*
 
 changelog:
   sort: asc

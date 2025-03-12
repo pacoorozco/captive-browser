@@ -2,7 +2,8 @@ package main
 
 import (
 	"context"
-	"io/ioutil"
+	"github.com/BurntSushi/toml"
+	"github.com/armon/go-socks5"
 	"log"
 	"net"
 	"os"
@@ -10,9 +11,6 @@ import (
 	"os/user"
 	"path/filepath"
 	"regexp"
-
-	"github.com/BurntSushi/toml"
-	"github.com/armon/go-socks5"
 )
 
 type UpstreamResolver struct {
@@ -65,7 +63,7 @@ func main() {
 		configPath = filepath.Join(usr.HomeDir, ".config")
 	}
 	configPath = filepath.Join(configPath, "captive-browser.toml")
-	tomlData, err := ioutil.ReadFile(configPath)
+	tomlData, err := os.ReadFile(configPath)
 	if err != nil {
 		log.Fatalln("Failed to read config:", err)
 	}
